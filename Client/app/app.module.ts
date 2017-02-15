@@ -97,7 +97,7 @@ export const COMMON_IMPORTS = [
     Ng2BootstrapModule.forRoot(),
 
     // Routing
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(COMMON_ROUTES)
 ];
 
 export const COMMON_PIPES = [
