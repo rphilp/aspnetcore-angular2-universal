@@ -7,7 +7,8 @@ import { UniversalModule, isBrowser, isNode, AUTO_PREBOOT } from 'angular2-unive
 
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
-import { IMPORTS, COMPONENTS, PROVIDERS, PIPES } from '../app.module';
+// All Common things to import from app.module between Browser & Server
+import { COMMON_IMPORTS, COMMON_COMPONENTS, COMMON_PROVIDERS, COMMON_PIPES } from '../app.module';
 import { AppComponent } from 'app';
 // Universal : XHR Cache 
 import { CacheService, StorageService, BrowserStorage } from 'app-shared';
@@ -24,8 +25,8 @@ export function getResponse() {
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
-        ...COMPONENTS,
-        ...PIPES
+        ...COMMON_COMPONENTS,
+        ...COMMON_PIPES
     ],
     imports: [
         // "UniversalModule" Must be first import.
@@ -33,9 +34,10 @@ export function getResponse() {
         // and NodeModule, NodeHttpModule etc for the server.
         UniversalModule,
 
-        ...IMPORTS,
+        ...COMMON_IMPORTS,
         // AppCommonModule,
 
+        // ** Notice this is only imported here in Browser
         DragulaModule,
 
         // NgRx
@@ -57,7 +59,7 @@ export function getResponse() {
         // The server will use a different one, since window & localStorage do not exist there
         { provide: StorageService, useClass: BrowserStorage },
 
-        ...PROVIDERS
+        ...COMMON_PROVIDERS
         
         // Universal concept. Uncomment this if you want to Turn OFF auto preboot complete
         // { provide: AUTO_PREBOOT, useValue: false } 

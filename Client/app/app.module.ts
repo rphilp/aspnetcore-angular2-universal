@@ -46,16 +46,10 @@ import {
 // it was destroyed.
 import { appState } from 'app';
 
-
-
-
-
-
-
 /* 
  * All of our Applications ROUTES Go here (imported in MODULES) 
  */
-export const ROUTES: Route[] = [
+export const COMMON_ROUTES: Route[] = [
     // Base route
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 
@@ -85,7 +79,7 @@ export const ROUTES: Route[] = [
     { path: '**', redirectTo: 'not-found' }
 ];
 
-export const IMPORTS = [
+export const COMMON_IMPORTS = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
 
     // This has ALL the "Common" stuff (CommonModule, FormsModule, ReactiveFormsModule, etc etc)
@@ -106,12 +100,11 @@ export const IMPORTS = [
     RouterModule.forRoot(ROUTES)
 ];
 
-
-export const PIPES = [
+export const COMMON_PIPES = [
     // put pipes here
 ];
 
-export const COMPONENTS = [
+export const COMMON_COMPONENTS = [
     // put shared components here
     AppComponent,
     NavMenuComponent,
@@ -127,7 +120,7 @@ export const COMPONENTS = [
     RxContextDirective
 ];
 
-export const PROVIDERS = [
+export const COMMON_PROVIDERS = [
     // put shared services here
     CacheService,
     HttpCacheService,
@@ -137,19 +130,3 @@ export const PROVIDERS = [
 ];
 
 
-/* 
- * Common NgModule (remember this gets imported into app.browser.module & app.server.module)
- */
-@NgModule({
-  imports: [
-    ...IMPORTS
-  ],
-  declarations: [
-    ...PIPES,
-    ...COMPONENTS
-  ],
-  providers: [
-    ...PROVIDERS
-  ]
-})
-export class AppCommonModule {}

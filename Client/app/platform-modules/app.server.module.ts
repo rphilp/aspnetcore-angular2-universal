@@ -6,7 +6,7 @@ import { Store, StoreModule } from '@ngrx/store';
 // for AoT we need to manually split universal packages (/browser & /node)
 import { UniversalModule, isBrowser, isNode } from 'angular2-universal/node';
 
-import { IMPORTS, COMPONENTS, PROVIDERS, PIPES } from '../app.module';
+import { COMMON_IMPORTS, COMMON_COMPONENTS, COMMON_PROVIDERS, COMMON_PIPES } from '../app.module';
 import { AppComponent } from 'app';
 // Universal : XHR Cache 
 import { CacheService, StorageService, ServerStorage } from 'app-shared';
@@ -33,8 +33,8 @@ export class DragulaDirective {
 
 @NgModule({
     declarations : [
-        ...COMPONENTS,
-        ...PIPES,
+        ...COMMON_COMPONENTS,
+        ...COMMON_PIPES,
 
         DragulaDirective
     ],
@@ -45,7 +45,7 @@ export class DragulaDirective {
         // and NodeModule, NodeHttpModule etc for the server.
         UniversalModule,
 
-        ...IMPORTS
+        ...COMMON_IMPORTS
     ],
     providers: [
         // Angular -Universal- providers below ::
@@ -60,7 +60,7 @@ export class DragulaDirective {
         // We're using Dependency Injection here to use a Server/Node specific "Storage" through the empty shell class StorageService
         { provide: StorageService, useClass: ServerStorage },
 
-        ...PROVIDERS
+        ...COMMON_PROVIDERS
         
 
         // Other providers you want to add that you don't want shared in "Common" but are browser only
