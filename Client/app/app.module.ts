@@ -46,10 +46,16 @@ import {
 // it was destroyed.
 import { appState } from 'app';
 
+
+
+
+
+
+
 /* 
  * All of our Applications ROUTES Go here (imported in MODULES) 
  */
-const ROUTES: Route[] = [
+export const ROUTES: Route[] = [
     // Base route
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 
@@ -79,42 +85,7 @@ const ROUTES: Route[] = [
     { path: '**', redirectTo: 'not-found' }
 ];
 
-
-const PIPES = [
-    // put pipes here
-];
-
-const COMPONENTS = [
-    // put shared components here
-    AppComponent,
-    NavMenuComponent,
-    RestTestComponent,
-    HomeComponent,
-    LoginComponent,
-    BootstrapComponent,
-    ExamplesComponent,
-    ChatComponent,
-    NotFoundComponent,
-
-    // Directives
-    RxContextDirective
-];
-
-const PROVIDERS = [
-    // put shared services here
-    CacheService,
-    HttpCacheService,
-    ApiGatewayService,
-    
-    Meta // MetaService is a cross platform way to change title, and update anything in the <head>
-];
-
-
-/* 
- * Common NgModule (remember this gets imported into app.browser.module & app.server.module)
- */
-@NgModule({
-  imports: [
+export const IMPORTS = [
     // Do NOT include UniversalModule, HttpModule, or JsonpModule here
 
     // This has ALL the "Common" stuff (CommonModule, FormsModule, ReactiveFormsModule, etc etc)
@@ -133,6 +104,45 @@ const PROVIDERS = [
 
     // Routing
     RouterModule.forRoot(ROUTES)
+];
+
+
+export const PIPES = [
+    // put pipes here
+];
+
+export const COMPONENTS = [
+    // put shared components here
+    AppComponent,
+    NavMenuComponent,
+    RestTestComponent,
+    HomeComponent,
+    LoginComponent,
+    BootstrapComponent,
+    ExamplesComponent,
+    ChatComponent,
+    NotFoundComponent,
+
+    // Directives
+    RxContextDirective
+];
+
+export const PROVIDERS = [
+    // put shared services here
+    CacheService,
+    HttpCacheService,
+    ApiGatewayService,
+    
+    Meta // MetaService is a cross platform way to change title, and update anything in the <head>
+];
+
+
+/* 
+ * Common NgModule (remember this gets imported into app.browser.module & app.server.module)
+ */
+@NgModule({
+  imports: [
+    ...IMPORTS
   ],
   declarations: [
     ...PIPES,

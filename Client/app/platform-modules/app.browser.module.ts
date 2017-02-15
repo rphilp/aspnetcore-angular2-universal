@@ -5,7 +5,9 @@ import { Store, StoreModule } from '@ngrx/store';
 // for AoT we need to manually split universal packages (/browser & /node)
 import { UniversalModule, isBrowser, isNode, AUTO_PREBOOT } from 'angular2-universal/browser';
 
-import { AppCommonModule } from '../app.module';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
+
+import { IMPORTS, COMPONENTS, PROVIDERS, PIPES } from '../app.module';
 import { AppComponent } from 'app';
 // Universal : XHR Cache 
 import { CacheService, StorageService, BrowserStorage } from 'app-shared';
@@ -21,17 +23,25 @@ export function getResponse() {
 
 @NgModule({
     bootstrap: [ AppComponent ],
-
+    declarations: [
+        ...COMPONENTS,
+        ...PIPES
+    ],
     imports: [
         // "UniversalModule" Must be first import.
         // ** NOTE ** : This automatically imports BrowserModule, HttpModule, and JsonpModule for Browser,
         // and NodeModule, NodeHttpModule etc for the server.
         UniversalModule,
 
-        AppCommonModule,
+        ...IMPORTS,
+        // AppCommonModule,
+
+        DragulaModule,
 
         // NgRx
         StoreDevtoolsModule.instrumentOnlyWithExtension()
+
+        
     ],
     providers: [
         // Angular -Universal- providers below ::
@@ -45,7 +55,9 @@ export function getResponse() {
 
         // We're using Dependency Injection here to use a Browser specific "Storage" (localStorage here) through the empty shell class StorageService
         // The server will use a different one, since window & localStorage do not exist there
-        { provide: StorageService, useClass: BrowserStorage }
+        { provide: StorageService, useClass: BrowserStorage },
+
+        ...PROVIDERS
         
         // Universal concept. Uncomment this if you want to Turn OFF auto preboot complete
         // { provide: AUTO_PREBOOT, useValue: false } 
