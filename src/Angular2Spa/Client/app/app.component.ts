@@ -2,8 +2,7 @@ import { Component, ViewEncapsulation, Inject, OnInit, OnDestroy } from '@angula
 import { Router, NavigationEnd, ActivatedRoute, PRIMARY_OUTLET } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
-import { isBrowser } from 'angular2-universal';
-import { Meta, metaStore } from 'app-shared';
+import { metaStore } from 'app-shared';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/filter';
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        public meta: Meta
+        @Inject('isBrowser') private isBrowser: boolean
     ) {}
     
     ngOnInit() {
@@ -66,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
                 // Temporarily only do this in the Browser
                 // Until we can get entire Html doc (this is a .NET issue since we never pass the entire Document (only root-app))
-                return isBrowser ? this.meta.setTitle(title) : '';
+                //return this.isBrowser ? this.meta.setTitle(title) : '';
             });
     }
 

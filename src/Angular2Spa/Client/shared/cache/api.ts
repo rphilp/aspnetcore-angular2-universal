@@ -1,7 +1,6 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Http, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { isNode } from 'angular2-universal';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
@@ -14,7 +13,7 @@ import { CacheService } from './universal-cache';
 @Injectable()
 export class HttpCacheService {
 
-    constructor(public _http: Http, public _cache: CacheService) { }
+    constructor(public _http: Http, public _cache: CacheService, @Inject('isNode') private isNode: boolean) { }
 
     get(url, options?: RequestOptionsArgs, autoClear: boolean = true) {
 
@@ -42,7 +41,7 @@ export class HttpCacheService {
 
         return this._http.get(url, options)
             .map(res => res.json())
-            .do(json => { if (isNode) { this._cache.set(key, json); } })
+            .do(json => { if (this.isNode) { this._cache.set(key, json); } })
             .share();
     }
 }

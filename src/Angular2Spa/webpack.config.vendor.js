@@ -37,15 +37,13 @@ module.exports = (env) => {
                 '@angular/platform-browser',
                 '@angular/platform-browser-dynamic',
                 '@angular/router',
-                '@angular/platform-server',
-                'angular2-universal',           
-                'angular2-universal-polyfills',
+                '@angular/platform-server',          
+                // 'angular2-universal-polyfills',
                 'core-js',
                 'es6-promise',
                 'zone.js',
                 //Added JS Libraries here
                 'jquery',
-                'signalr',
                 //Added CSS Libraries here
                 // './node_modules/bootstrap/dist/css/bootstrap.css',
                 // './node_modules/font-awesome/css/font-awesome.css'

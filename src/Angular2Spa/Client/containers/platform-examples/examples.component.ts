@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { isBrowser } from 'angular2-universal';
+import { Inject, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from 'app-shared';
 
@@ -32,7 +31,10 @@ export class ExamplesComponent implements OnInit {
     browserPlatformInterval: Observable<any>;
     
     // Use "constructor"s only for dependency injection
-    constructor (private storage: StorageService) {}
+    constructor (
+        private storage: StorageService,
+        @Inject('isBrowser') private isBrowser: boolean
+    ) {}
 
     // Here you want to handle anything with @Input()'s @Output()'s
     // Data retrieval / etc - this is when the Component is "ready" and wired up
@@ -42,7 +44,7 @@ export class ExamplesComponent implements OnInit {
          * We don't want an interval to continuously run on the server (it will just timeout the server) or delay our response.
          * So avoid having things like "interval" run on the server. With Universal's "isBrowser" we can have it only run there.
          */
-        if (isBrowser) {
+        if (this.isBrowser) {
             this.browserPlatformInterval = Observable.interval(300);
         }
 

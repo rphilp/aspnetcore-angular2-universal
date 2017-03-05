@@ -2,9 +2,15 @@
     ViewData["Title"] = ".NET Core + Angular + Universal !";
 }
 
-<app-root asp-prerender-module="Client/dist/main-server">
-    ... Loading ...
+<!--asp-prerender-module="Client/dist/main-server"-->
+
+@Html.Raw(ViewData["Title"])
+
+<app-root>
+    @Html.Raw(ViewData["SpaHtml"])
 </app-root>
+
+
  
 
 <script src="~/dist/vendor.js" asp-append-version="true"></script>

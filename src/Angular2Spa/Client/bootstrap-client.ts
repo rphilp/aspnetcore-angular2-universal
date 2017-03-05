@@ -1,9 +1,17 @@
-import 'angular2-universal-polyfills/browser'; // This needs to be at the top, Universal neccessary polyfills
-import './__2.1.1.workaround.ts'; // temporary until 2.1.1 things are patched in Core
+// import 'angular2-universal-polyfills/browser'; // This needs to be at the top, Universal neccessary polyfills
+import 'zone.js/dist/zone';
+
+// polyfills
+// import 'es6-promise';
+// import 'es6-shim';
+// import 'ie-shim';
+// typescript emit metadata
+import 'reflect-metadata';
+// zone.js to track promises
+import 'zone.js/dist/zone';
 
 import { enableProdMode } from '@angular/core';
-// We're going to let Universal take over the Clients "bootstrap" (instead of the normal platformBrowserDynamic)
-import { platformUniversalDynamic } from 'angular2-universal';
+import { platformBrowser } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 // HMR state management 
@@ -15,7 +23,7 @@ let platform;
 
 if (process.env.production) {
   enableProdMode();
-  platform = platformUniversalDynamic();
+  platform = platformBrowser();
 } else {
   // Development mode
   platform = platformBrowserDynamic();

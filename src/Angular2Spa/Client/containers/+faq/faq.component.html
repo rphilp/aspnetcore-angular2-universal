@@ -34,7 +34,7 @@ setTimeout / setInterval / etc should always be wrapped in this</strong>, as you
 
 <pre>
 {{ " 
-import { isBrowser } from 'angular2-universal';
+@Inject('isBrowser') private isBrowser: boolean
 
 if (isBrowser) {
    // do something only in the Browser

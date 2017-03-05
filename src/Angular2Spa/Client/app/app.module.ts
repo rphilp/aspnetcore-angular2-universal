@@ -8,6 +8,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -35,8 +36,7 @@ import {
 import {
     HttpCacheService, CacheService, // Universal : XHR Cache
     ApiGatewayService, 
-    RxContextDirective,
-    Meta
+    RxContextDirective
 } from 'app-shared';
 
 //////////////////////////////////////////////////////////////////
@@ -106,7 +106,7 @@ const PROVIDERS = [
     HttpCacheService,
     ApiGatewayService,
     
-    Meta // MetaService is a cross platform way to change title, and update anything in the <head>
+    // Meta // MetaService is a cross platform way to change title, and update anything in the <head>
 ];
 
 
@@ -115,11 +115,8 @@ const PROVIDERS = [
  */
 @NgModule({
   imports: [
-    // Do NOT include UniversalModule, HttpModule, or JsonpModule here
-
-    // This has ALL the "Common" stuff (CommonModule, FormsModule, ReactiveFormsModule, etc etc)
-    // You would import this into your child NgModules so you don't need to duplicate so much code
     BaseSharedModule,
+    HttpModule,
 
     // Angular
     RouterModule,
