@@ -25,7 +25,7 @@ Angular SEO in action:
 * [Upcoming Features](#upcoming-features)
 * [Application Structure](#application-structure)
 * [Universal Gotchas](#universal-gotchas)
-* ~~[FAQ](#faq)~~
+* [FAQ](#faq)
 * [Special Thanks](#special-thanks)
 * [License](#license)
 
@@ -118,9 +118,9 @@ export ASPNETCORE_ENVIRONMENT=Development
 - ~~DONE - Fix old README to match new project~~
 - Add Redux back in
 - Add Bootstrap with SCSS
-- Add REST API CRUD Demo
+- ~~Add REST API CRUD Demo~~
 - Potractor e2e testing
-- Add Azure application insights module (or at least demo how to use it)
+- Add Azure application insights module (or at least demo how to use it) [npm: angular-application-insights](https://github.com/MarkPieszak/angular-application-insights)
 
 ----
 
@@ -316,7 +316,7 @@ Well now, your Client-side Angular will take over, and you'll have a fully funct
  - **`window`**, **`document`**, **`navigator`**, and other browser types - _do not exist on the server_ - so using them, or any library that uses them (jQuery for example) will not work. You do have some options, if you truly need some of this functionality:
     - If you need to use them, consider limiting them to only your client and wrapping them situationally. You can use the Object injected using the PLATFORM_ID token to check whether the current platform is browser or server. 
     
-    ```
+    ```typescript
      import { PLATFORM_ID } from '@angular/core';
      import { isPlatformBrowser, isPlatformServer } from '@angular/common';
      
@@ -337,7 +337,7 @@ Well now, your Client-side Angular will take over, and you'll have a fully funct
      - Try to *limit or* **avoid** using **`setTimeout`**. It will slow down the server-side rendering process. Make sure to remove them [`ngOnDestroy`](https://angular.io/docs/ts/latest/api/core/index/OnDestroy-class.html) in Components.
    - Also for RxJs timeouts, make sure to _cancel_ their stream on success, for they can slow down rendering as well.
  - **Don't manipulate the nativeElement directly**. Use the _Renderer2_. We do this to ensure that in any environment we're able to change our view.
-```
+```typescript
 constructor(element: ElementRef, renderer: Renderer) {
   renderer.setElementStyle(element.nativeElement, 'font-size', 'x-large');
 }
@@ -413,6 +413,8 @@ Nothing's ever perfect, but please let me know by creating an issue (make sure t
 Copyright (c) 2016-2017 [Mark Pieszak](https://github.com/MarkPieszak)
 
 Twitter: [@MarkPieszak](http://twitter.com/MarkPieszak) | Medium: [@MarkPieszak](https://medium.com/@MarkPieszak)
+
+----
 
 # Looking for Angular Consulting / Training / support?
 
