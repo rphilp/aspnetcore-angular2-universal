@@ -4,6 +4,7 @@
   "scripts": {
     "test": "karma start Client/test/karma.conf.js",
     "build:dev": "webpack --progress --color",
+    "postinstall": "npm run build:dev",
     "build:aot": "webpack --env.aot --env.client & webpack --env.aot --env.server"
   },
   "dependencies": {
